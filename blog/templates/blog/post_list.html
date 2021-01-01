@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>l@xZ bl0g</title>
-</head>
-<body>
-    {% for p in postsss %}
-        <div>
-            <h3> {{ p.title }}</h3>
-            <p> {{ p.text| linebreaksbr }} </p>
-            <p> created: {{ p.created_on }}</p>
-            <p> modified: {{ p.published_date }}</p>
-            <br>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in postsss %}
+        <div class="post">
+            <div class="date">
+                Published: {{ post.published_date }}
+            </div>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+            <div class="date">
+                Modified: {{ post.created_on }}
+            </div>
         </div>
     {% endfor %}
-</body>
-</html>
+{% endblock %}
